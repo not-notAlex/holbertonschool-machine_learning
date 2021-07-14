@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+module for task 2
+"""
+
+
 def matrix_shape(matrix):
     """
     returns the shape of a matrix
