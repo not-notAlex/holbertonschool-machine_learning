@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
+"""
+moduel for task 8
+"""
+
+
 def mat_mul(mat1, mat2):
+    """
+    performs matrix multiplication
+    """
     result = [[]]
     for i in range(1, len(mat1)):
         result.append([])

@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
+"""
+module for task 7
+"""
+
+
 def cat_matrices2D(mat1, mat2, axis=0):
+    """
+    concatenates two matrixs
+    """
     result = []
     if axis == 0:
         for i in mat1:
