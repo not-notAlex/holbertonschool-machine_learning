@@ -6,6 +6,6 @@ def matrix_shape(matrix):
         while True:
             result.append(len(size))
             size = size[0]
-    except:
+    except TypeError:
         pass
     return result
