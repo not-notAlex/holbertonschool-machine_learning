@@ -8,6 +8,10 @@ def mat_mul(mat1, mat2):
     """
     performs matrix multiplication
     """
+    columns = len(mat1[0])
+    rows = len(mat2)
+    if columns != rows:
+        return None
     result = [[]]
     for i in range(1, len(mat1)):
         result.append([])
