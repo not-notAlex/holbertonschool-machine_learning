@@ -25,5 +25,5 @@ def cat_matrices2D(mat1, mat2, axis=0):
                 for y in mat2[x]:
                     result[x].append(y)
             return result
-    except IndexError:
+    except:
         return None
