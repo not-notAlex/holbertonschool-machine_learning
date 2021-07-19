@@ -25,4 +25,5 @@ y32 = np.exp((r3 / t32) * x3)
 np.random.seed(5)
 student_grades = np.random.normal(68, 15, 50)
 
-# your code here
+plt.figure()
+plt.suptitle('All in One')
