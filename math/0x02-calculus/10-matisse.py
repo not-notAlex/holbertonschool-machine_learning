@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """
-module for task 9
+module for task 10
 """
 
 
-def summation_i_squared(n):
+def poly_derivative(poly):
     """
-    calculates a sum of i^2
+    calculates derivative of polynomial
     """
-
-
+    result = []
+    for i in range(1, len(poly)):
+        result.append(i * poly[i])
+    if len(result) == 0:
+        result.append(0)
+    return result
