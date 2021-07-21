@@ -9,6 +9,8 @@ def poly_integral(poly, C=0):
     calculates integral of polynomial
     """
     result = []
+    if type(poly) is not list or type(C) is not int:
+        return None
     result.append(C)
     for i in range(0, len(poly)):
         if i == 0:

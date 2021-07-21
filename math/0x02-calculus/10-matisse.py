@@ -9,6 +9,8 @@ def poly_derivative(poly):
     calculates derivative of polynomial
     """
     result = []
+    if type(poly) is not list or poly is None:
+        return None
     for i in range(1, len(poly)):
         result.append(i * poly[i])
     if len(result) == 0:
