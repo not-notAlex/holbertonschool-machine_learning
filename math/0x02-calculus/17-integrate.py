@@ -11,7 +11,7 @@ def poly_integral(poly, C=0):
     result = []
     if type(poly) is not list or type(C) is not int:
         return None
-    if len(poly > 0):
+    if len(poly) > 0:
         result.append(C)
     for i in range(0, len(poly)):
         if i == 0:
