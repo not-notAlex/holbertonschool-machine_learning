@@ -21,6 +21,6 @@ def poly_integral(poly, C=0):
             if float.is_integer(num):
                 num = int(num)
             result.append(num)
-    if len(result) == 2 and result[0] == 0:
+    if len(result) == 2 and result[0] == 0 and result[1] == 0:
         result.remove(0)
     return result
