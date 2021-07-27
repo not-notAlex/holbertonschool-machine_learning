@@ -16,7 +16,7 @@ class Normal:
         self.stddev = float(stddev)
         if data is None:
             if stddev <= 0:
-                raise ValueError("lambtha must be a positive value")
+                raise ValueError("stddev must be a positive value")
         else:
             if type(data) != list:
                 raise TypeError("data must be a list")
