@@ -39,6 +39,54 @@ class NeuralNetwork:
         self.__A2 = 1 / (1 + np.exp(-total2))
         return self.A1, self.A2
 
+    def cost(self, Y, A):
+        """
+        calculates the cost of model using logistic regression
+        """
+        m = Y.shape[1]
+        e = 1.0000001
+        cost = (1 / m) * -np.sum((Y * np.log(A)) + ((1 - Y) * np.log(e - A)))
+        return cost
+
+    def evaluate(self, X, Y):
+        """
+        evaluates the network's predictions
+        """
+        A1, A2 = self.forward_prop(X)
+        cost = self.cost(Y, A2)
+        evaluation = np.rint(A2).astype(np.int)
+        return evaluation, cost
+
+    def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
+        """
+        calculates one pass of gradient descent on the network
+        """
+        m = Y.shape[1]
+        m = 1 / m
+        dz2 = A2 - Y
+        dz1 = np.matmul(self.W2.T, A2 - Y) * (A1 * (1 - A1))
+        self.__W2 = self.W2 - (alpha * m * np.matmul(dz2, A1.T))
+        self.__b2 = self.b2 - (alpha * m * np.sum(dz2, axis=1, keepdims=True))
+        self.__W1 = self.W1 - (alpha * m * np.matmul(dz1, X.T))
+        self.__b1 = self.b1 - (alpha * m * np.sum(dz1, axis=1, keepdims=True))
+
+    def train(self, X, Y, iterations=5000, alpha=0.05):
+        """
+        trains the neural network
+        """
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations < 1:
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha <= 0:
+            raise ValueError("alpha must be positive")
+        for i in range(iterations):
+            A1, A2 = self.forward_prop(X)
+            self.gradient_descent(X, Y, A1, A2, alpha)
+        return self.evaluate(X, Y)
+        
     @property
     def W1(self):
         """

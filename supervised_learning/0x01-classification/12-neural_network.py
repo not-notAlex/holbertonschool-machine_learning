@@ -39,6 +39,24 @@ class NeuralNetwork:
         self.__A2 = 1 / (1 + np.exp(-total2))
         return self.A1, self.A2
 
+    def cost(self, Y, A):
+        """
+        calculates the cost of model using logistic regression
+        """
+        m = Y.shape[1]
+        e = 1.0000001
+        cost = (1 / m) * -np.sum((Y * np.log(A)) + ((1 - Y) * np.log(e - A)))
+        return cost
+
+    def evaluate(self, X, Y):
+        """
+        evaluates the network's predictions
+        """
+        A1, A2 = self.forward_prop(X)
+        cost = self.cost(Y, A2)
+        evaluation = np.rint(A2).astype(np.int)
+        return evaluation, cost
+
     @property
     def W1(self):
         """
