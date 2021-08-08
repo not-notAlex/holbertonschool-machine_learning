@@ -14,4 +14,6 @@ def one_hot_encode(Y, classes):
         return None
     if type(classes) is not int or classes < 2:
         return None
+    if classes < np.amax(Y):
+        return None
     return np.eye(classes)[Y].T
