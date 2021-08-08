@@ -83,8 +83,10 @@ class DeepNeuralNetwork:
             dW = m * np.matmul(prev[self.L - i], A.T)
             db = m * np.sum(prev[self.L - i], axis=1, keepdims=True)
             wp = self.weights["W{}".format(i)]
-            self.__weights["W{}".format(i)] = self.weights["W{}".format(i)] - (alpha * dW)
-            self.__weights["b{}".format(i)] = self.weights["b{}".format(i)] - (alpha * db)
+            self.__weights["W{}".format(i)] = (
+                self.weights["W{}".format(i)] - (alpha * dW))
+            self.__weights["b{}".format(i)] = (
+                self.weights["b{}".format(i)] - (alpha * db))
 
     @property
     def L(self):
