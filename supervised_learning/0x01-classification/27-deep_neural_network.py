@@ -38,24 +38,24 @@ class DeepNeuralNetwork:
         """
         calculates forward propagation on network
         """
-        for i in range(self.L + 1):
-            if i == 0:
-                self.__cache["A0"] = X
+        self.__cache["A0"] = X
+        for i in range(1, self.L + 1):
+            z_tmp = np.matmul(self.weights["W{}".format(i)], self.__cache[
+                "A{}".format(i - 1)]) + self.weights["b{}".format(i)]
+            if i == self.L:
+                t_exp = np.exp(z_tmp)
+                A_tmp = t_exp / np.sum(t_exp, axis=0, keepdims=True)
             else:
-                W = self.weights["W{}".format(i)]
-                b = self.weights["b{}".format(i)]
-                value = np.matmul(W, self.cache["A{}".format(i - 1)]) + b
-                A = 1 / (1 + np.exp(-value))
-                self.__cache["A{}".format(i)] = A
-        return A, self.cache
+                A_tmp = 1 / (1 + np.exp((-1) * z_tmp))
+            self.__cache["A{}".format(i)] = A_tmp
+        return self.cache["A" + str(self.L)], self.cache
 
     def cost(self, Y, A):
         """
         calculates the cost of the model using logistic regression
         """
         m = Y.shape[1]
-        e = 1.0000001
-        cost = (1 / m) * -np.sum((Y * np.log(A)) + ((1 - Y) * np.log(e - A)))
+        cost = -np.sum(Y * np.log(A)) / m
         return cost
 
     def evaluate(self, X, Y):
