@@ -118,7 +118,7 @@ class DeepNeuralNetwork:
         cost = self.cost(Y, A)
         steps.append(cost)
         if verbose:
-            print("Cost after {} iterations: {}".format(i, cost))
+            print("Cost after {} iterations: {}".format(iterations, cost))
         if graph:
             x_points = np.arange(0, iterations + 1, step)
             y_points = np.asarray(steps)
