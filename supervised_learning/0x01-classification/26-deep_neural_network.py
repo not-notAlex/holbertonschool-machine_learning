@@ -90,7 +90,8 @@ class DeepNeuralNetwork:
             self.__weights["b{}".format(i)] = (
                 self.weights["b{}".format(i)] - (alpha * db))
 
-    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100):
+    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
+              graph=True, step=100):
         """
         trains the neural network
         """
@@ -135,7 +136,7 @@ class DeepNeuralNetwork:
         saves the instance object to a file in pickle format
         """
         if filename[:-4] != ".pkl":
-            filename = filename + ".pkl"
+            filename += ".pkl"
         with open(filename, 'wb') as f:
             pickle.dump(self, f)
             f.close()
