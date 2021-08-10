@@ -79,18 +79,19 @@ class DeepNeuralNetwork:
         """
         m = Y.shape[1]
         m = 1 / m
-        prev = []
+        wc = self.__weights.copy()
         for i in range(self.L, 0, -1):
-            A = cache["A{}".format(i - 1)]
+            A = cache["A{}".format(i)]
             if i == self.L:
-                prev.append(cache["A{}".format(i)] - Y)
+                dz = A - Y
             else:
-                dzp = prev[self.L - i - 1]
-                Ai = cache["A{}".format(i)]
-                prev.append(np.matmul(wp.T, dzp) * (Ai * (1 - Ai)))
-            dW = m * np.matmul(prev[self.L - i], A.T)
-            db = m * np.sum(prev[self.L - i], axis=1, keepdims=True)
-            wp = self.weights["W{}".format(i)]
+                if self.__activation == 'sig':
+                    g = A * (1 - A)
+                else:
+                    g = 1 - (A ** 2)
+                dz = (wc["W{}".format(i + 1)].T @ dz) * g
+            dW = m * (dz @ cache["A{}".format(i - 1)].T)
+            db = m * np.sum(dz, axis=1, keepdims=True)
             self.__weights["W{}".format(i)] = (
                 self.weights["W{}".format(i)] - (alpha * dW))
             self.__weights["b{}".format(i)] = (
