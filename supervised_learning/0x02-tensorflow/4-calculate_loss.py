@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+module for task 4
+"""
 
 import tensorflow as tf
 
