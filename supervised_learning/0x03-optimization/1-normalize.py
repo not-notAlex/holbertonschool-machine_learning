@@ -4,7 +4,6 @@ module for task 1
 """
 
 import numpy as np
-import tensorflow as tf
 
 
 def normalize(X, m, s):

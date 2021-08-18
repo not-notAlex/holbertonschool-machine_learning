@@ -4,7 +4,6 @@ module for task 2
 """
 
 import numpy as np
-import tensorflow as tf
 
 
 def shuffle_data(X, Y):

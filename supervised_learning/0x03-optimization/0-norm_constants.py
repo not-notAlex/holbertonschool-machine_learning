@@ -4,7 +4,6 @@ module for task 0
 """
 
 import numpy as np
-import tensorflow as tf
 
 
 def normalization_constants(X):
