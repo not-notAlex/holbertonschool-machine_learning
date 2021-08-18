@@ -3,7 +3,14 @@
 module for task 0
 """
 
-import numpy as np
-import tensorflow as tf
 
-
+def moving_average(data, beta):
+    """
+    calculates weighted moving average
+    """
+    ema = []
+    v = 0
+    for i in range(len(data)):
+        v = (v * beta) + ((1 - beta) * data[i])
+        ema.append(v / (1 - (beta ** (i + 1))))
+    return ema
