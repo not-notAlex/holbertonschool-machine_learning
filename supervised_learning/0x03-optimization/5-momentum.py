@@ -3,7 +3,11 @@
 module for task 0
 """
 
-import numpy as np
-import tensorflow as tf
 
-
+def update_variables_momentum(alpha, beta1, var, grad, v):
+    """
+    updates variable w/ gradient descent w/ momentum algorithm
+    """
+    dw = (beta1 * v) + ((1 - beta1) * grad)
+    var -= alpha * dw
+    return var, dw
