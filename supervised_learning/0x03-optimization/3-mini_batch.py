@@ -44,10 +44,15 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
                 hi = (step + 1) * batch_size
                 if hi > m:
                     hi = m
-                session.run(train_op, feed_dict={x: x_shuffle[lo:hi, :], y: y_shuffle[lo:hi, :]})
+                session.run(train_op, feed_dict={x: x_shuffle[lo:hi, :],
+                                                 y: y_shuffle[lo:hi, :]})
                 if (step + 1) % 100 == 0:
-                    cost = session.run(loss, feed_dict={x: x_shuffle[lo:hi, :], y: y_shuffle[lo:hi, :]})
-                    accu = session.run(accuracy, feed_dict={x: x_shuffle[lo:hi, :], y: y_shuffle[lo:hi, :]})
+                    cost = session.run(
+                        loss, feed_dict={x: x_shuffle[lo:hi, :],
+                                         y: y_shuffle[lo:hi, :]})
+                    accu = session.run(
+                        accuracy, feed_dict={x: x_shuffle[lo:hi, :],
+                                             y: y_shuffle[lo:hi, :]})
                     print("\tStep {}:".format(step + 1))
                     print("\t\tCost: {}".format(cost))
                     print("\t\tAccuracy: {}".format(accu))
