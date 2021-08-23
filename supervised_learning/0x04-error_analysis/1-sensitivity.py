@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+module for task 1
+"""
 
 import numpy as np
 
