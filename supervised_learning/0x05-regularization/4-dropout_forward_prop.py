@@ -4,7 +4,6 @@ module for task 4
 """
 
 import numpy as np
-import tensorflow as tf
 
 
 def dropout_forward_prop(X, weights, L, keep_prob):

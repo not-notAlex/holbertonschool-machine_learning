@@ -4,7 +4,6 @@ module for task 5
 """
 
 import numpy as np
-import tensorflow as tf
 
 
 def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
