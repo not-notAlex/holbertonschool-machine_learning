@@ -12,21 +12,13 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     """
     m = Y.shape[1]
     m = 1 / m
-    prev = []
+    dz = cache["A" + str(L)] - Y
     for i in range(L, 0, -1):
-        A = cache["A{}".format(i - 1)]
-        if i == L:
-            prev.append(cache["A{}".format(i)] - Y)
-        else:
-            dzp = prev[L - i - 1]
-            Ai = cache["A{}".format(i)]
-            prev.append(np.matmul(wp.T, dzp) * (Ai * (1 - Ai)))
-        dW = m * (np.matmul(prev[L - i], A.T) + (
-            lambtha * weights["W{}".format(i)]))
-        db = m * (np.sum(prev[L - i], axis=1, keepdims=True) + (
-            lambtha * weights["b{}".format(i)]))
-        wp = weights["W{}".format(i)]
+        l2 = (lambtha * m) * weights["W{}".format(i)]
+        dw = (np.matmul(dz, cache["A{}".format(i - 1)].T) * m) + l2
+        db = (np.sum(dz, axis=1, keepdims=True)) * m
+        dz = np.matmul(weights["W{}".format(i)].T, dz) * (1 - (cache["A{}".format(i - 1)] ** 2))
         weights["W{}".format(i)] = (
-            weights["W{}".format(i)] - (alpha * dW))
+            weights["W{}".format(i)] - (alpha * dw))
         weights["b{}".format(i)] = (
             weights["b{}".format(i)] - (alpha * db))
