@@ -25,7 +25,7 @@ def train_model(network, data, labels, batch_size, epochs,
             return alpha / (1 + decay_rate * epoch)
         callbacks.append(K.callbacks.LearningRateScheduler(learning_rate, 1))
     if save_best:
-        callback.append(K.callbacks.ModelCheckpoint(
+        callbacks.append(K.callbacks.ModelCheckpoint(
             filepath=filepath, save_best_only=True))
     return network.fit(
         x=data, y=labels, batch_size=batch_size,
