@@ -20,8 +20,8 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
         pw = ((((w - 1) * sw) + kw - width) // 2) + 1
     else:
         ph, pw = padding
-    images = np.pad(
-        images, ((0, 0), (ph, ph), (pw, pw), (0, 0)), 'constant', constant_values=0)
+    images = np.pad(images, ((0, 0), (
+        ph, ph), (pw, pw), (0, 0)), 'constant', constant_values=0)
     ch = ((h + (2 * ph) - kh) // sh) + 1
     cw = ((w + (2 * pw) - kw) // sw) + 1
     result = np.zeros((m, ch, cw, nc))
@@ -32,7 +32,8 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
             b = 0
             for y in range(0, (w + (2 * pw) - kw + 1), sw):
                 result[:, a, b, i] = np.sum(
-                    images[:, x: x + kh, y: y + kw, :] * ki, axis=1).sum(axis=1).sum(axis=1)
+                    images[:, x: x + kh, y: y + kw,
+                           :] * ki, axis=1).sum(axis=1).sum(axis=1)
                 b = b + 1
             a = a + 1
     return result
