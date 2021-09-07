@@ -26,7 +26,7 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     cw = ((w + (2 * pw) - kw) // sw) + 1
     result = np.zeros((m, ch, cw, nc))
     for i in range(nc):
-        ki = kernels[:, :, :, i]
+        ki = W[:, :, :, i]
         a = 0
         for x in range(0, (h + (2 * ph) - kh + 1), sh):
             b = 0
