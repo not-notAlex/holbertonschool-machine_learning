@@ -16,8 +16,8 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     if padding == 'valid':
         ph, pw = 0, 0
     elif padding == 'same':
-        ph = ((((h - 1) * sh) + kh - h) // 2) + 1
-        pw = ((((w - 1) * sw) + kw - w) // 2) + 1
+        ph = ((((h - 1) * sh) + kh - h) // 2)
+        pw = ((((w - 1) * sw) + kw - w) // 2)
     else:
         return
     images = np.pad(A_prev, ((0, 0), (
@@ -32,8 +32,8 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
             z = 0
             for y in range(0, (w + (2 * pw) - kw + 1), sw):
                 result[:, a, z, i] = activation((np.sum(
-                    images[:, x: x + kh, y: y + kw,
-                           :] * ki, axis=1).sum(axis=1).sum(axis=1)) + b[0, 0, 0, i])
+                    images[:, x: x + kh, y: y + kw, :] * ki, axis=1).sum(
+                        axis=1).sum(axis=1)) + b[0, 0, 0, i])
                 z = z + 1
             a = a + 1
     return result
