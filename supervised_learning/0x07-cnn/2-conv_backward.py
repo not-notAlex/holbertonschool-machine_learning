@@ -27,16 +27,15 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     dA = np.zeros((m, h_prev + (2 * ph), w_prev + (2 * pw), c_prev))
     dW = np.zeros((kh, kw, c_prev, c))
     for i in range(m):
-        for kernel_index in range(c):
+        for ki in range(c):
             for x in range(h):
                 for y in range(w):
                     a = x * sh
                     z = y * sw
                     dA[i, a: a + kh, z: z + kw, :] += (
-                        dZ[i, x, y, kernel_index] * W[:, :, :, kernel_index])
-                    dW[:, :, :, kernel_index] += (
-                        images[i, a: a + kh, z: z + kw,
-                               :] * dZ[i, x, y, kernel_index])
+                        dZ[i, x, y, ki] * W[:, :, :, ki])
+                    dW[:, :, :, ki] += (
+                        images[i, a: a + kh, z: z + kw, :] * dZ[i, x, y, ki])
     if padding is 'same':
         dA = dA[:, ph:-ph, pw:-pw, :]
     return dA, dW, db
