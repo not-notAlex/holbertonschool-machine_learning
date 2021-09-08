@@ -21,7 +21,6 @@ def lenet5(x, y):
     out = tf.layers.Dense(10, activation='softmax', kernel_initializer=ki)(L7)
     loss = tf.losses.softmax_cross_entropy(y, out)
     train = tf.train.AdamOptimizer().minimize(loss)
-    max_pred = tf.argmax(out, 1)
-    equal = tf.equal(tf.argmax(y, 1), max_pred)
-    accuracy = tf.reduce_mean(tf.cast(equal, tf.float32))
+    equality = tf.equal(tf.argmax(y, axis=1), tf.argmax(out, axis=1))
+    accuracy = tf.reduce_mean(tf.cast(equality, tf.float32))
     return out, train, loss, accuracy
