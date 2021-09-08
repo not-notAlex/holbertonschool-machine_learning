@@ -3,7 +3,6 @@
 module for task 4
 """
 
-import numpy as np
 import tensorflow as tf
 
 
