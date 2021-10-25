@@ -20,7 +20,8 @@ class MultiNormal:
         if data.shape[1] < 2:
             raise ValueError("data must contain multiple data points")
         self.mean = np.mean(data, axis=1).reshape((data.shape[0], 1))
-        self.cov = np.matmul(data - self.mean, data.T - self.mean.T) / (data.shape[1] - 1)
+        self.cov = np.matmul(
+            data - self.mean, data.T - self.mean.T) / (data.shape[1] - 1)
 
     def pdf(self, x):
         """
@@ -34,6 +35,7 @@ class MultiNormal:
         if x.shape[0] != d or x.shape[1] != 1:
             raise ValueError("x must have the shape ({}, 1)".format(d))
         pdf = 1.0 / np.sqrt(((2 * np.pi) ** d) * np.linalg.det(self.cov))
-        mult = np.matmul(np.matmul((x - self.mean).T, np.linalg.inv(self.cov)), (x - self.mean))
+        mult = np.matmul(np.matmul(
+            (x - self.mean).T, np.linalg.inv(self.cov)), (x - self.mean))
         pdf *= np.exp(-0.5 * mult)
         return pdf[0][0]
