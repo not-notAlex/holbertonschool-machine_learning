@@ -13,8 +13,8 @@ def pca(X, var=0.95):
     u, s, v = np.linalg.svd(X)
     a = np.cumsum(s)
     dim = []
-    l = s.shape[0]
-    for i in range(l):
+    x = s.shape[0]
+    for i in range(x):
         if ((a[i]) / a[-1]) >= var:
             dim.append(i)
     r = dim[0] + 1
