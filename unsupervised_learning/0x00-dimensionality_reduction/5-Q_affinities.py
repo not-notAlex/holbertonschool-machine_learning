@@ -1,21 +1,18 @@
 #!/usr/bin/env python3
 """
-module for task 0
+module for task 5
 """
 
 import numpy as np
 
 
-def pca(X, var=0.95):
+def Q_affinities(Y):
     """
-    performs PCA on a dataset
+    calculates the Q affinities
     """
-    u, s, v = np.linalg.svd(X)
-    a = np.cumsum(s)
-    dim = []
-    x = s.shape[0]
-    for i in range(x):
-        if ((a[i]) / a[-1]) >= var:
-            dim.append(i)
-    r = dim[0] + 1
-    return v.T[:, :r]
+    n = -2 * np.dot(Y, Y.T)
+    num = 1 / (1 + np.add(np.add(
+        n, np.sum(np.square(Y), 1)).T, np.sum(np.square(Y), 1)))
+    num[range(Y.shape[0]), range(Y.shape[0])] = 0
+    Q = num / np.sum(num)
+    return (Q, num)

@@ -1,21 +1,17 @@
 #!/usr/bin/env python3
 """
-module for task 0
+module for task 8
 """
 
 import numpy as np
+pca = __import__('1-pca').pca
+P_affinities = __import__('4-P_affinities').P_affinities
+grads = __import__('6-grads').grads
+cost = __import__('7-cost').cost
 
 
-def pca(X, var=0.95):
+def tsne(X, ndims=2, idims=50, perplexity=30.0, iterations=1000, lr=500):
     """
-    performs PCA on a dataset
+    performs a t-SNE transofrmation
     """
-    u, s, v = np.linalg.svd(X)
-    a = np.cumsum(s)
-    dim = []
-    x = s.shape[0]
-    for i in range(x):
-        if ((a[i]) / a[-1]) >= var:
-            dim.append(i)
-    r = dim[0] + 1
-    return v.T[:, :r]
+    None

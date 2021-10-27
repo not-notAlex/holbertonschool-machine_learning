@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """
-module for task 0
+module for task 6
 """
 
 import numpy as np
+Q_affinities = __import__('5-Q_affinities').Q_affinities
 
 
-def pca(X, var=0.95):
+def grads(Y, P):
     """
-    performs PCA on a dataset
+    calculates the gradients of Y
     """
-    u, s, v = np.linalg.svd(X)
-    a = np.cumsum(s)
-    dim = []
-    x = s.shape[0]
-    for i in range(x):
-        if ((a[i]) / a[-1]) >= var:
-            dim.append(i)
-    r = dim[0] + 1
-    return v.T[:, :r]
+    Q, num = Q_affinities(Y)
+    diff = P - Q
+    dY = np.zeros(Y.shape)
+    for i in range(Y.shape[0]):
+        dY[i, :] = np.sum(np.tile(
+            diff[:, i] * num[:, i], (Y.shape[1], 1)).T * (Y[i, :] - Y), 0)
+    return dY, Q

@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """
-module for task 0
+module for task 2
 """
 
 import numpy as np
 
 
-def pca(X, var=0.95):
+def P_init(X, perplexity):
     """
-    performs PCA on a dataset
+    initializes variables required to calculate t-SNE
     """
-    u, s, v = np.linalg.svd(X)
-    a = np.cumsum(s)
-    dim = []
-    x = s.shape[0]
-    for i in range(x):
-        if ((a[i]) / a[-1]) >= var:
-            dim.append(i)
-    r = dim[0] + 1
-    return v.T[:, :r]
+    n = X.shape[0]
+    m = np.matmul(X, -X.T)
+    D = np.add(np.add(2 * m, np.sum(
+        np.square(X), 1)), np.sum(np.square(X), 1).T)
+    P = np.zeros((n, n))
+    betas = np.ones((n, 1))
+    H = np.log2(perplexity)
+    return (D, P, betas, H)
