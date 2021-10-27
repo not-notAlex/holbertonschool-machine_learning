@@ -12,9 +12,8 @@ def P_init(X, perplexity):
     """
     n = X.shape[0]
     m = np.matmul(X, -X.T)
-    D = np.add(np.add(2 * m, np.sum(
-        np.square(X), 1)), np.sum(np.square(X), 1).T)
-    P = np.zeros((n, n))
-    betas = np.ones((n, 1))
+    D = np.add(np.add(-2 * np.dot(X, X.T), np.sum(np.square(X), 1)).T, np.sum(np.square(X), 1))
+    P = np.zeros((X.shape[0], X.shape[0]))
+    betas = np.ones((X.shape[0], 1))
     H = np.log2(perplexity)
-    return (D, P, betas, H)
+    return D, P, betas, H
