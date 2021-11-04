@@ -3,11 +3,13 @@
 module for task 10
 """
 
-import numpy as np
+import sklearn.cluster
 
 
 def kmeans(X, k):
     """
     performs K-means on a dataset
     """
-    None
+    kmean = sklearn.cluster.KMeans(k)
+    kmean.fit(X)
+    return kmean.cluster_centers_, kmean.labels_
