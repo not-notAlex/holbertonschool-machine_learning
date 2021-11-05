@@ -12,7 +12,7 @@ def agglomerative(X, dist):
     performs agglomerative clustering on dataset
     """
     Z = scipy.cluster.hierarchy.linkage(X, method="ward")
-    dendo = scipy.cluster.hierarchy.dendrogram(Z, color_threshold=dist)
+    dendro = scipy.cluster.hierarchy.dendrogram(Z, color_threshold=dist)
     clss = scipy.cluster.hierarchy.fcluster(Z, t=dist, criterion='distance')
     plt.show()
     return clss
