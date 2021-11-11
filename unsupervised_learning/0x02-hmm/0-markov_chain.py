@@ -12,5 +12,5 @@ def markov_chain(P, s, t=1):
     """
     prob = s
     for i in range(t):
-        prob = np.matmul(result, P)
+        prob = np.matmul(prob, P)
     return prob
