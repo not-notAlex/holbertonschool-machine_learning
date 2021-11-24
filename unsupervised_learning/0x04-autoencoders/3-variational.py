@@ -17,9 +17,6 @@ def sampling(args):
     return z_mean + keras.backend.exp(z_log_sigma / 2) * epsilon
 
 
-
-
-
 def autoencoder(input_dims, hidden_layers, latent_dims):
     """
     creates a variational autoencoder
@@ -35,7 +32,6 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
             z_mean) - keras.backend.exp(z_log_sigma)
         kl_loss = keras.backend.sum(kl_loss, axis=-1) * -0.5
         return keras.backend.mean(reconstruction_loss + kl_loss)
-
 
     model_input = keras.layers.Input(shape=(input_dims,))
     encoded = model_input
