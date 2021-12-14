@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 """
-module for task 0
+module for task 3
 """
 
-from sklearn.feature_extraction.text import CountVectorizer
+from gensim.models import Word2Vec
 
 
+def gensim_to_keras(model):
+    """
+    converts a gensim word2vec model to a keras
+    """
+    return model.wv.get_keras_embedding(True)
