@@ -21,6 +21,6 @@ def uni_bleu(references, sentence):
     total = sum(words.values())
     index = np.argmin([abs(len(i) - sentence_length) for i in references])
     BLEU = np.exp(1 - float(len(references[index])) / float(sentence_length))
-    if sentence_length > best_match:
+    if sentence_length > len(references[index]):
         BLEU = 1
     return BLEU * np.exp(np.log(total / sentence_length))
