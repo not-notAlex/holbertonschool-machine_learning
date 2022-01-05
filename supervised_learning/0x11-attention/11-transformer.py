@@ -29,7 +29,7 @@ class Transformer(tf.keras.Model):
         """
         call method
         """
-        encode = self.encoder(inputs, training, encoder_mask)
-        decode = self.decoder(
-            target, encode, training, look_ahead_mask, decoder_mask)
-        return self.linear(decode)
+        enc_output = self.encoder(inputs, training, encoder_mask)
+        dec_output = self.decoder(
+            target, enc_output, training, look_ahead_mask, decoder_mask)
+        return self.linear(dec_output)
