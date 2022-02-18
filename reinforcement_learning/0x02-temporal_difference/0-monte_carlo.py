@@ -8,7 +8,8 @@ import gym
 import numpy as np
 
 
-def monte_carlo(env, V, policy, episodes=5000, max_steps=100, alpha=0.1, gamma=0.99):
+def monte_carlo(env, V, policy, episodes=5000,
+                max_steps=100, alpha=0.1, gamma=0.99):
     """
     performs the monte carlo method
     """
@@ -30,6 +31,8 @@ def monte_carlo(env, V, policy, episodes=5000, max_steps=100, alpha=0.1, gamma=0
             episode[1].append(reward)
             state = new_s
         for y in range(len(episode[0])):
-            Gt = sum(np.array(episode[1][y:]) * np.array(discounts[:len(episode[1][y:])]))
-            V[episode[0][y]] = V[episode[0][y]] + alpha * (Gt - V[episode[0][y]])
+            Gt = sum(np.array(episode[1][y:]) * np.array(
+                discounts[:len(episode[1][y:])]))
+            V[episode[0][y]] = V[episode[0][y]] + alpha * (
+                Gt - V[episode[0][y]])
     return V
