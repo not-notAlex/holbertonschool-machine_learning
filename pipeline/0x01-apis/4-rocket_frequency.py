@@ -20,7 +20,8 @@ if __name__ == '__main__':
     rockets = []
     for i in r.json():
         if i['id'] in launches:
-            rockets.append({'rocket': i['name'], 'launches': launches[i['id']]})
+            rockets.append(
+                {'rocket': i['name'], 'launches': launches[i['id']]})
     launches = sorted(rockets, key=lambda i: i['rocket'])
     launches = sorted(rockets, key=lambda i: i['launches'], reverse=True)
     for i in launches:
